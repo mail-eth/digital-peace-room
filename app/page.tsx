@@ -67,8 +67,8 @@ export default function LandingPage() {
           transition={{ duration: 0.6, delay: 1.2 }}
           whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(59, 130, 246, 0.4)' }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => router.push('/rooms')}
-          className="glass-strong px-12 py-5 rounded-2xl text-lg font-medium text-white transition-smooth glow-blue"
+          onClick={() => router.push('/rooms/reflection')}
+          className="glass-strong px-16 py-6 rounded-2xl text-xl md:text-2xl font-semibold text-white transition-smooth glow-blue hover:bg-white/10"
         >
           Enter Room
         </motion.button>

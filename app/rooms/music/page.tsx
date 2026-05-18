@@ -122,7 +122,7 @@ export default function MusicRoom() {
         >
           <div className="flex flex-col md:flex-row items-center gap-8">
             {/* Album art */}
-            <div className="w-48 h-48 rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center text-6xl">
+            <div className="w-40 h-40 md:w-48 md:h-48 rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center text-5xl md:text-6xl">
               {selectedCategory.emoji}
             </div>
 

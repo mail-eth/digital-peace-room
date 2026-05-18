@@ -164,7 +164,7 @@ export default function MoodSpace() {
                 }
               `}
             >
-              <div className="text-6xl mb-4">{mood.emoji}</div>
+              <div className="text-5xl md:text-6xl mb-4">{mood.emoji}</div>
               <h3 className="text-xl font-semibold text-white mb-2">
                 {mood.name}
               </h3>

@@ -12,14 +12,14 @@ export default function SettingsPage() {
   const [theme, setTheme] = useState('midnight')
 
   const themes = [
-    { id: 'midnight', name: 'Midnight Blue', gradient: 'from-blue-950 to-purple-950' },
-    { id: 'rain', name: 'Rainy Night', gradient: 'from-slate-950 to-blue-950' },
-    { id: 'sunset', name: 'Sunset Glow', gradient: 'from-orange-950 to-pink-950' },
-    { id: 'forest', name: 'Forest Night', gradient: 'from-green-950 to-teal-950' },
+    { id: 'midnight', name: 'Midnight Blue', gradient: 'linear-gradient(135deg, #1e1b4b, #312e81)' },
+    { id: 'rain', name: 'Rainy Night', gradient: 'linear-gradient(135deg, #0f172a, #1e293b)' },
+    { id: 'sunset', name: 'Sunset Glow', gradient: 'linear-gradient(135deg, #7c2d12, #9f1239)' },
+    { id: 'forest', name: 'Forest Night', gradient: 'linear-gradient(135deg, #064e3b, #065f46)' },
   ]
 
   return (
-    <div className="min-h-screen px-6 py-12">
+    <div className="min-h-screen px-6 py-12 bg-linear-black">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
@@ -32,16 +32,22 @@ export default function SettingsPage() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center gap-2 bg-slate-500/10 backdrop-blur-sm border border-slate-500/20 px-6 py-3 rounded-full mb-6"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full mb-6"
+            style={{
+              background: 'rgba(94, 106, 210, 0.1)',
+              border: '1px solid rgba(94, 106, 210, 0.2)'
+            }}
           >
-            <SettingsIcon className="w-5 h-5 text-slate-300" />
-            <span className="text-sm uppercase tracking-wider text-slate-200">Settings</span>
+            <SettingsIcon className="w-5 h-5" style={{ color: '#7170ff' }} />
+            <span className="text-sm uppercase tracking-wider" style={{ color: '#d0d6e0', fontWeight: 510 }}>
+              Settings
+            </span>
           </motion.div>
           
-          <h1 className="text-4xl md:text-6xl font-display font-bold text-white mb-4">
+          <h1 className="text-4xl md:text-6xl font-medium text-linear-primary mb-4" style={{ fontWeight: 510, letterSpacing: '-1.056px' }}>
             Personalize Your Space
           </h1>
-          <p className="text-lg md:text-xl text-slate-200/70 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-linear-tertiary max-w-2xl mx-auto leading-relaxed" style={{ fontWeight: 400 }}>
             Adjust your peace room experience
           </p>
         </motion.div>
@@ -53,19 +59,20 @@ export default function SettingsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl"
+            className="rounded-2xl p-8"
+            style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.08)' }}
           >
             <div className="flex items-center gap-3 mb-8">
-              <Volume2 className="w-6 h-6 text-blue-300" />
-              <h2 className="text-2xl font-semibold text-white">Ambience</h2>
+              <Volume2 className="w-6 h-6" style={{ color: '#7170ff' }} />
+              <h2 className="text-2xl font-medium text-linear-primary" style={{ fontWeight: 510 }}>Ambience</h2>
             </div>
 
             <div className="space-y-8">
               {/* Intensity slider */}
               <div>
                 <div className="flex justify-between mb-4">
-                  <label className="text-base text-white/80">Ambience Intensity</label>
-                  <span className="text-base text-white/60 font-medium">{ambienceIntensity}%</span>
+                  <label className="text-base text-linear-secondary" style={{ fontWeight: 400 }}>Ambience Intensity</label>
+                  <span className="text-base text-linear-tertiary font-medium" style={{ fontWeight: 510 }}>{ambienceIntensity}%</span>
                 </div>
                 <input
                   type="range"
@@ -73,12 +80,12 @@ export default function SettingsPage() {
                   max="100"
                   value={ambienceIntensity}
                   onChange={(e) => setAmbienceIntensity(Number(e.target.value))}
-                  className="w-full h-3 bg-white/10 rounded-full appearance-none cursor-pointer"
+                  className="w-full h-3 rounded-full appearance-none cursor-pointer"
                   style={{
-                    background: `linear-gradient(to right, rgb(59 130 246) 0%, rgb(168 85 247) ${ambienceIntensity}%, rgba(255,255,255,0.1) ${ambienceIntensity}%)`
+                    background: `linear-gradient(to right, #7170ff 0%, #7170ff ${ambienceIntensity}%, rgba(255,255,255,0.1) ${ambienceIntensity}%)`
                   }}
                 />
-                <p className="text-sm text-white/40 mt-3">
+                <p className="text-sm text-linear-quaternary mt-3" style={{ fontWeight: 400 }}>
                   Controls rain, particles, and ambient effects
                 </p>
               </div>
@@ -86,16 +93,16 @@ export default function SettingsPage() {
               {/* Autoplay music */}
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-base text-white/80 mb-1">Autoplay Music</p>
-                  <p className="text-sm text-white/40">Start ambient music when entering rooms</p>
+                  <p className="text-base text-linear-secondary mb-1" style={{ fontWeight: 400 }}>Autoplay Music</p>
+                  <p className="text-sm text-linear-quaternary" style={{ fontWeight: 400 }}>Start ambient music when entering rooms</p>
                 </div>
                 <motion.button
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setAutoplayMusic(!autoplayMusic)}
-                  className={`
-                    w-16 h-9 rounded-full transition-all relative
-                    ${autoplayMusic ? 'bg-blue-500' : 'bg-white/10'}
-                  `}
+                  className="w-16 h-9 rounded-full transition-all relative"
+                  style={{
+                    background: autoplayMusic ? '#5e6ad2' : 'rgba(255, 255, 255, 0.1)'
+                  }}
                 >
                   <motion.div
                     animate={{ x: autoplayMusic ? 28 : 2 }}
@@ -112,27 +119,28 @@ export default function SettingsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl"
+            className="rounded-2xl p-8"
+            style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.08)' }}
           >
             <div className="flex items-center gap-3 mb-8">
-              <Eye className="w-6 h-6 text-purple-300" />
-              <h2 className="text-2xl font-semibold text-white">Visual Effects</h2>
+              <Eye className="w-6 h-6" style={{ color: '#7170ff' }} />
+              <h2 className="text-2xl font-medium text-linear-primary" style={{ fontWeight: 510 }}>Visual Effects</h2>
             </div>
 
             <div className="space-y-8">
               {/* Visual effects toggle */}
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-base text-white/80 mb-1">Enable Visual Effects</p>
-                  <p className="text-sm text-white/40">Floating particles, glows, and blur effects</p>
+                  <p className="text-base text-linear-secondary mb-1" style={{ fontWeight: 400 }}>Enable Visual Effects</p>
+                  <p className="text-sm text-linear-quaternary" style={{ fontWeight: 400 }}>Floating particles, glows, and blur effects</p>
                 </div>
                 <motion.button
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setVisualEffects(!visualEffects)}
-                  className={`
-                    w-16 h-9 rounded-full transition-all relative
-                    ${visualEffects ? 'bg-purple-500' : 'bg-white/10'}
-                  `}
+                  className="w-16 h-9 rounded-full transition-all relative"
+                  style={{
+                    background: visualEffects ? '#5e6ad2' : 'rgba(255, 255, 255, 0.1)'
+                  }}
                 >
                   <motion.div
                     animate={{ x: visualEffects ? 28 : 2 }}
@@ -145,16 +153,16 @@ export default function SettingsPage() {
               {/* Animations toggle */}
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-base text-white/80 mb-1">Enable Animations</p>
-                  <p className="text-sm text-white/40">Smooth transitions and motion effects</p>
+                  <p className="text-base text-linear-secondary mb-1" style={{ fontWeight: 400 }}>Enable Animations</p>
+                  <p className="text-sm text-linear-quaternary" style={{ fontWeight: 400 }}>Smooth transitions and motion effects</p>
                 </div>
                 <motion.button
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setAnimations(!animations)}
-                  className={`
-                    w-16 h-9 rounded-full transition-all relative
-                    ${animations ? 'bg-purple-500' : 'bg-white/10'}
-                  `}
+                  className="w-16 h-9 rounded-full transition-all relative"
+                  style={{
+                    background: animations ? '#5e6ad2' : 'rgba(255, 255, 255, 0.1)'
+                  }}
                 >
                   <motion.div
                     animate={{ x: animations ? 28 : 2 }}
@@ -171,11 +179,12 @@ export default function SettingsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl"
+            className="rounded-2xl p-8"
+            style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.08)' }}
           >
             <div className="flex items-center gap-3 mb-8">
-              <Palette className="w-6 h-6 text-pink-300" />
-              <h2 className="text-2xl font-semibold text-white">Theme</h2>
+              <Palette className="w-6 h-6" style={{ color: '#7170ff' }} />
+              <h2 className="text-2xl font-medium text-linear-primary" style={{ fontWeight: 510 }}>Theme</h2>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -185,16 +194,14 @@ export default function SettingsPage() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => setTheme(t.id)}
-                  className={`
-                    p-6 rounded-2xl transition-all text-left
-                    ${theme === t.id
-                      ? 'ring-2 ring-white/30 bg-white/5'
-                      : 'bg-white/5 border border-white/10 hover:bg-white/10'
-                    }
-                  `}
+                  className="p-6 rounded-2xl transition-all text-left"
+                  style={{
+                    background: theme === t.id ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.02)',
+                    border: theme === t.id ? '2px solid rgba(94, 106, 210, 0.5)' : '1px solid rgba(255, 255, 255, 0.08)'
+                  }}
                 >
-                  <div className={`h-20 rounded-xl bg-gradient-to-br ${t.gradient} mb-4 border border-white/10`} />
-                  <p className="text-base font-medium text-white">{t.name}</p>
+                  <div className="h-20 rounded-xl mb-4" style={{ background: t.gradient, border: '1px solid rgba(255, 255, 255, 0.08)' }} />
+                  <p className="text-base font-medium text-linear-primary" style={{ fontWeight: 510 }}>{t.name}</p>
                 </motion.button>
               ))}
             </div>
@@ -205,25 +212,31 @@ export default function SettingsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl"
+            className="rounded-2xl p-8"
+            style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.08)' }}
           >
             <div className="flex items-center gap-3 mb-8">
-              <Sparkles className="w-6 h-6 text-amber-300" />
-              <h2 className="text-2xl font-semibold text-white">Account</h2>
+              <Sparkles className="w-6 h-6" style={{ color: '#7170ff' }} />
+              <h2 className="text-2xl font-medium text-linear-primary" style={{ fontWeight: 510 }}>Account</h2>
             </div>
 
             <div className="space-y-6">
               <div className="flex items-center gap-4">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-amber-500/20 to-orange-500/20 border border-white/10 flex items-center justify-center text-4xl">
+                <div className="w-20 h-20 rounded-full flex items-center justify-center text-4xl"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(94, 106, 210, 0.2), rgba(113, 112, 255, 0.2))',
+                    border: '1px solid rgba(255, 255, 255, 0.08)'
+                  }}
+                >
                   🐻
                 </div>
                 <div>
-                  <p className="text-lg text-white font-medium">peacefulbear</p>
-                  <p className="text-sm text-white/40">Anonymous identity</p>
+                  <p className="text-lg text-linear-primary font-medium" style={{ fontWeight: 510 }}>peacefulbear</p>
+                  <p className="text-sm text-linear-quaternary" style={{ fontWeight: 400 }}>Anonymous identity</p>
                 </div>
               </div>
 
-              <p className="text-sm text-white/40 italic">
+              <p className="text-sm text-linear-quaternary italic" style={{ fontWeight: 400 }}>
                 Authentication system coming soon
               </p>
             </div>
@@ -236,7 +249,14 @@ export default function SettingsPage() {
             transition={{ duration: 0.6, delay: 0.7 }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full bg-white/5 border border-white/10 py-5 rounded-2xl text-white text-lg font-semibold hover:bg-white/10 transition-all"
+            className="w-full py-5 rounded-2xl text-lg font-medium transition-all"
+            style={{
+              background: '#5e6ad2',
+              color: '#ffffff',
+              fontWeight: 510
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.background = '#828fff'}
+            onMouseLeave={(e) => e.currentTarget.style.background = '#5e6ad2'}
           >
             Save Preferences
           </motion.button>

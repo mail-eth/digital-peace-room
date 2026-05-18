@@ -2,51 +2,39 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { MessageCircle, Send, Users } from 'lucide-react'
+import { MessageCircle, Send, Users, Moon, Cloud, Brain, Coffee, Dumbbell } from 'lucide-react'
 
 const chatRooms = [
-  { id: 'late-night', name: 'Late Night Room', emoji: '🌙', members: 12 },
-  { id: 'rain', name: 'Rain Room', emoji: '🌧️', members: 8 },
-  { id: 'overthinking', name: 'Overthinking Room', emoji: '💭', members: 15 },
-  { id: 'study-cafe', name: 'Study Cafe', emoji: '☕', members: 6 },
-  { id: 'quiet-gym', name: 'Quiet Gym Room', emoji: '🏋️', members: 4 },
+  { id: 'late-night', name: 'Late Night Room', icon: Moon, members: 12 },
+  { id: 'rain', name: 'Rain Room', icon: Cloud, members: 8 },
+  { id: 'overthinking', name: 'Overthinking Room', icon: Brain, members: 15 },
+  { id: 'study-cafe', name: 'Study Cafe', icon: Coffee, members: 6 },
+  { id: 'quiet-gym', name: 'Quiet Gym Room', icon: Dumbbell, members: 4 },
 ]
 
 const mockMessages = [
   {
     id: 1,
     nickname: 'sleepyfox',
-    animal: 'fox',
+    animal: '🦊',
     message: 'anyone else up late thinking about everything?',
     timestamp: '23:45'
   },
   {
     id: 2,
     nickname: 'quietowl',
-    animal: 'owl',
+    animal: '🦉',
     message: 'yeah... can\'t sleep. too much on my mind',
     timestamp: '23:47'
   },
   {
     id: 3,
     nickname: 'lonelycat',
-    animal: 'cat',
+    animal: '🐱',
     message: 'same here. this room feels safe though',
     timestamp: '23:50'
   },
 ]
-
-const getAnimalEmoji = (animal: string) => {
-  const emojis: Record<string, string> = {
-    fox: '🦊',
-    owl: '🦉',
-    cat: '🐱',
-    rabbit: '🐰',
-    wolf: '🐺',
-    bear: '🐻'
-  }
-  return emojis[animal] || '🐾'
-}
 
 export default function ChatLounge() {
   const [selectedRoom, setSelectedRoom] = useState(chatRooms[0])
@@ -59,7 +47,7 @@ export default function ChatLounge() {
     const newMessage = {
       id: messages.length + 1,
       nickname: 'peacefulbear',
-      animal: 'bear',
+      animal: '🐻',
       message: input.trim(),
       timestamp: new Date().toLocaleTimeString('en-US', { 
         hour: '2-digit', 
@@ -73,7 +61,7 @@ export default function ChatLounge() {
   }
 
   return (
-    <div className="min-h-screen px-6 py-12">
+    <div className="min-h-screen px-6 py-12 bg-linear-black">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -86,16 +74,22 @@ export default function ChatLounge() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center gap-2 bg-green-500/10 backdrop-blur-sm border border-green-500/20 px-6 py-3 rounded-full mb-6"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full mb-6"
+            style={{
+              background: 'rgba(94, 106, 210, 0.1)',
+              border: '1px solid rgba(94, 106, 210, 0.2)'
+            }}
           >
-            <MessageCircle className="w-5 h-5 text-green-300" />
-            <span className="text-sm uppercase tracking-wider text-green-200">Chat Lounge</span>
+            <MessageCircle className="w-5 h-5" style={{ color: '#7170ff' }} />
+            <span className="text-sm uppercase tracking-wider" style={{ color: '#d0d6e0', fontWeight: 510 }}>
+              Chat Lounge
+            </span>
           </motion.div>
           
-          <h1 className="text-4xl md:text-6xl font-display font-bold text-white mb-4">
+          <h1 className="text-4xl md:text-6xl font-medium text-linear-primary mb-4" style={{ fontWeight: 510, letterSpacing: '-1.056px' }}>
             Anonymous Sanctuary
           </h1>
-          <p className="text-lg md:text-xl text-green-200/70 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-linear-tertiary max-w-2xl mx-auto leading-relaxed" style={{ fontWeight: 400 }}>
             Connect with others in peaceful spaces
           </p>
         </motion.div>
@@ -108,8 +102,8 @@ export default function ChatLounge() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="lg:col-span-1"
           >
-            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
-              <h3 className="text-sm uppercase tracking-wider text-white/60 mb-6">
+            <div className="rounded-2xl p-6" style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+              <h3 className="text-sm uppercase tracking-wider mb-6" style={{ color: '#8a8f98', fontWeight: 510 }}>
                 Rooms
               </h3>
               <div className="space-y-3">
@@ -119,21 +113,20 @@ export default function ChatLounge() {
                     whileHover={{ x: 5 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setSelectedRoom(room)}
-                    className={`
-                      w-full text-left p-4 rounded-xl transition-all
-                      ${selectedRoom.id === room.id
-                        ? 'bg-green-500/20 text-white border-2 border-green-500/50'
-                        : 'text-white/60 hover:text-white hover:bg-white/5 border border-transparent'
-                      }
-                    `}
+                    className="w-full text-left p-4 rounded-xl transition-all"
+                    style={{
+                      background: selectedRoom.id === room.id ? 'rgba(94, 106, 210, 0.2)' : 'transparent',
+                      border: selectedRoom.id === room.id ? '2px solid rgba(94, 106, 210, 0.5)' : '1px solid transparent',
+                      color: selectedRoom.id === room.id ? '#f7f8f8' : '#8a8f98'
+                    }}
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="flex items-center gap-2">
-                        <span className="text-xl">{room.emoji}</span>
-                        <span className="text-sm font-medium">{room.name}</span>
+                        <room.icon className="w-5 h-5" />
+                        <span className="text-sm font-medium" style={{ fontWeight: 510 }}>{room.name}</span>
                       </span>
                     </div>
-                    <div className="flex items-center gap-1 text-xs text-white/40">
+                    <div className="flex items-center gap-1 text-xs" style={{ color: '#62666d' }}>
                       <Users className="w-3 h-3" />
                       <span>{room.members} online</span>
                     </div>
@@ -150,16 +143,16 @@ export default function ChatLounge() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="lg:col-span-3"
           >
-            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+            <div className="rounded-2xl p-8" style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
               {/* Room header */}
-              <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/10">
+              <div className="flex items-center justify-between mb-8 pb-6" style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
                 <div className="flex items-center gap-3">
-                  <span className="text-3xl">{selectedRoom.emoji}</span>
+                  <selectedRoom.icon className="w-8 h-8" style={{ color: '#7170ff' }} />
                   <div>
-                    <h2 className="text-2xl font-semibold text-white">
+                    <h2 className="text-2xl font-medium text-linear-primary" style={{ fontWeight: 510 }}>
                       {selectedRoom.name}
                     </h2>
-                    <p className="text-sm text-white/40">
+                    <p className="text-sm" style={{ color: '#62666d' }}>
                       {selectedRoom.members} people here
                     </p>
                   </div>
@@ -176,19 +169,24 @@ export default function ChatLounge() {
                     transition={{ duration: 0.3 }}
                     className="flex gap-3"
                   >
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500/20 to-blue-500/20 border border-white/10 flex items-center justify-center text-xl flex-shrink-0">
-                      {getAnimalEmoji(msg.animal)}
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl flex-shrink-0"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(94, 106, 210, 0.2), rgba(113, 112, 255, 0.2))',
+                        border: '1px solid rgba(255, 255, 255, 0.08)'
+                      }}
+                    >
+                      {msg.animal}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-baseline gap-2 mb-1">
-                        <span className="text-sm font-medium text-white">
+                        <span className="text-sm font-medium text-linear-primary" style={{ fontWeight: 510 }}>
                           {msg.nickname}
                         </span>
-                        <span className="text-xs text-white/30">
+                        <span className="text-xs" style={{ color: '#62666d' }}>
                           {msg.timestamp}
                         </span>
                       </div>
-                      <p className="text-base text-white/80 leading-relaxed">
+                      <p className="text-base text-linear-secondary leading-relaxed" style={{ fontWeight: 400 }}>
                         {msg.message}
                       </p>
                     </div>
@@ -204,21 +202,33 @@ export default function ChatLounge() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Type a message... (be kind)"
-                  className="flex-1 bg-white/5 border border-white/10 px-6 py-4 rounded-2xl text-white placeholder-white/40 outline-none focus:ring-2 focus:ring-green-500/50 focus:border-green-500/50 transition-all"
+                  className="flex-1 px-6 py-4 rounded-2xl text-linear-primary outline-none focus:ring-2 transition-all"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    fontWeight: 400
+                  }}
                 />
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handleSend}
                   disabled={!input.trim()}
-                  className="bg-green-500/20 border border-green-500/30 px-6 py-4 rounded-2xl text-green-300 hover:bg-green-500/30 hover:text-green-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 py-4 rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{
+                    background: '#5e6ad2',
+                    color: '#ffffff',
+                    fontWeight: 510
+                  }}
+                  onMouseEnter={(e) => !e.currentTarget.disabled && (e.currentTarget.style.background = '#828fff')}
+                  onMouseLeave={(e) => e.currentTarget.style.background = '#5e6ad2'}
                 >
                   <Send className="w-5 h-5" />
                 </motion.button>
               </div>
 
               {/* Note */}
-              <p className="text-xs text-green-300/40 text-center mt-6 italic">
+              <p className="text-xs text-center mt-6 italic" style={{ color: '#62666d' }}>
                 Realtime chat with Supabase coming soon • Be kind, be human
               </p>
             </div>
@@ -230,22 +240,23 @@ export default function ChatLounge() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-8 bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl shadow-2xl"
+          className="mt-8 p-8 rounded-2xl"
+          style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.08)' }}
         >
-          <h3 className="text-xl font-semibold text-white mb-6">
+          <h3 className="text-xl font-medium text-linear-primary mb-6" style={{ fontWeight: 510 }}>
             🤝 Lounge Guidelines
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-white/60">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm" style={{ color: '#8a8f98' }}>
             <div>
-              <span className="text-white font-medium block mb-2">Be kind</span>
+              <span className="text-linear-primary font-medium block mb-2" style={{ fontWeight: 510 }}>Be kind</span>
               <p>This is a safe space for everyone</p>
             </div>
             <div>
-              <span className="text-white font-medium block mb-2">Be human</span>
+              <span className="text-linear-primary font-medium block mb-2" style={{ fontWeight: 510 }}>Be human</span>
               <p>Share authentically, listen deeply</p>
             </div>
             <div>
-              <span className="text-white font-medium block mb-2">Be calm</span>
+              <span className="text-linear-primary font-medium block mb-2" style={{ fontWeight: 510 }}>Be calm</span>
               <p>Slow mode enabled for peaceful conversations</p>
             </div>
           </div>

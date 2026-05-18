@@ -13,7 +13,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <head>
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" 
+          rel="stylesheet" 
+        />
+      </head>
+      <body className="antialiased font-linear">
         {children}
       </body>
     </html>

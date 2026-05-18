@@ -9,40 +9,49 @@ export default function LandingPage() {
   const router = useRouter()
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-linear-black">
       {/* Subtle ambient layer */}
-      <div className="fixed inset-0 opacity-30">
+      <div className="fixed inset-0 opacity-20">
         <RainBackground />
       </div>
       
       {/* Gradient overlay */}
-      <div className="fixed inset-0 bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950" />
+      <div className="fixed inset-0 bg-gradient-to-b from-[#08090a] via-[#0f1011]/50 to-[#08090a]" />
 
       {/* Main content */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        {/* Main heading */}
+        {/* Main heading - Linear Display style */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 text-white leading-tight"
+          className="text-5xl md:text-7xl lg:text-8xl font-medium mb-8 text-linear-primary leading-tight"
+          style={{ 
+            fontWeight: 510,
+            letterSpacing: '-1.584px',
+            fontFeatureSettings: '"cv01", "ss03"'
+          }}
         >
           A quiet place
           <br />
           for loud minds
         </motion.h1>
 
-        {/* Subtitle */}
+        {/* Subtitle - Linear Body Large */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-xl md:text-2xl text-slate-300 mb-16 max-w-2xl mx-auto leading-relaxed"
+          className="text-lg md:text-xl text-linear-tertiary mb-16 max-w-2xl mx-auto leading-relaxed"
+          style={{ 
+            fontWeight: 400,
+            letterSpacing: '-0.165px'
+          }}
         >
           Your digital sanctuary for reflection, calm music, and emotional peace
         </motion.p>
 
-        {/* CTA Button */}
+        {/* CTA Button - Linear Primary Button */}
         <motion.button
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -50,17 +59,24 @@ export default function LandingPage() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => router.push('/rooms/reflection')}
-          className="bg-white text-slate-950 px-12 py-5 rounded-full text-xl font-semibold hover:bg-slate-100 transition-all shadow-2xl"
+          className="px-12 py-4 rounded-md text-lg font-medium text-white transition-all shadow-lg"
+          style={{
+            backgroundColor: '#5e6ad2',
+            fontWeight: 510,
+            borderRadius: '6px'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#828fff'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#5e6ad2'}
         >
           Enter Peace Room
         </motion.button>
 
-        {/* Feature cards */}
+        {/* Feature cards - Linear Card style */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6"
         >
           {[
             {
@@ -84,13 +100,20 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
-              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all"
+              className="p-8 rounded-lg transition-all"
+              style={{
+                background: 'rgba(255, 255, 255, 0.02)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                borderRadius: '8px'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.02)'}
             >
-              <feature.icon className="w-8 h-8 text-white mb-4 mx-auto" />
-              <h3 className="text-xl font-semibold text-white mb-3">
+              <feature.icon className="w-8 h-8 text-linear-primary mb-4 mx-auto" />
+              <h3 className="text-xl font-medium text-linear-primary mb-3" style={{ fontWeight: 590, letterSpacing: '-0.24px' }}>
                 {feature.title}
               </h3>
-              <p className="text-slate-400 leading-relaxed">
+              <p className="text-linear-tertiary leading-relaxed" style={{ fontSize: '15px', fontWeight: 400 }}>
                 {feature.description}
               </p>
             </motion.div>

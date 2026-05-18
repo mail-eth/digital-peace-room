@@ -19,7 +19,7 @@ export default function LandingPage() {
       <div className="fixed inset-0 bg-gradient-to-b from-[#08090a] via-[#0f1011]/50 to-[#08090a]" />
 
       {/* Main content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 lg:px-12 text-center">
         {/* Main heading - Linear Display style */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}

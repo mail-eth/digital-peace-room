@@ -4,6 +4,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Digital Peace Room - A quiet place for loud minds",
   description: "A calm emotional digital sanctuary for overwhelmed people. Late night rain, quiet jazz cafe, emotional minimalism.",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+  },
 };
 
 export default function RootLayout({

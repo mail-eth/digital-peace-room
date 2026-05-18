@@ -61,7 +61,7 @@ export default function ChatLounge() {
   }
 
   return (
-    <div className="min-h-screen px-6 py-12 bg-linear-black">
+    <div className="min-h-screen px-4 md:px-8 py-8 md:py-12 bg-linear-black">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div

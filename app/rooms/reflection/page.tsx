@@ -33,7 +33,7 @@ export default function ReflectionRoom() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-12 bg-linear-black">
+    <div className="min-h-screen flex items-center justify-center px-4 md:px-8 py-8 md:py-12 bg-linear-black">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -56,17 +56,24 @@ export default function LandingPage() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => router.push('/rooms/reflection')}
-          className="px-12 py-4 rounded-md text-lg font-medium text-white transition-all shadow-lg"
+          className="px-16 py-5 rounded-xl text-lg font-medium text-white transition-all"
           style={{
             backgroundColor: '#5e6ad2',
             fontWeight: 510,
-            borderRadius: '6px'
+            borderRadius: '12px',
+            boxShadow: '0 4px 24px rgba(94, 106, 210, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1)'
           }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#828fff'}
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#5e6ad2'}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#7170ff'
+            e.currentTarget.style.boxShadow = '0 8px 32px rgba(113, 112, 255, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.15)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#5e6ad2'
+            e.currentTarget.style.boxShadow = '0 4px 24px rgba(94, 106, 210, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1)'
+          }}
         >
           Enter Peace Room
         </motion.button>

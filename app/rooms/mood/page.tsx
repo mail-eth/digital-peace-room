@@ -3,61 +3,70 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Heart } from 'lucide-react'
-import { getMoodColor, getMoodAmbience } from '@/lib/utils'
 
 const moods = [
   {
     id: 'anxious',
     name: 'Anxious',
     emoji: '😰',
-    description: 'Feeling worried or restless',
-    color: 'from-orange-500 to-red-500',
+    color: 'from-orange-500/20 to-red-500/20',
+    borderColor: 'border-orange-500/30',
+    description: 'Feeling overwhelmed and restless',
+    recommendation: 'Try deep breathing exercises and calming rain sounds'
   },
   {
     id: 'lonely',
     name: 'Lonely',
     emoji: '😔',
-    description: 'Feeling isolated or disconnected',
-    color: 'from-blue-500 to-purple-500',
+    color: 'from-blue-500/20 to-indigo-500/20',
+    borderColor: 'border-blue-500/30',
+    description: 'Feeling disconnected and isolated',
+    recommendation: 'Visit the chat lounge or write in your journal'
   },
   {
     id: 'overwhelmed',
     name: 'Overwhelmed',
     emoji: '😵',
+    color: 'from-purple-500/20 to-pink-500/20',
+    borderColor: 'border-purple-500/30',
     description: 'Too much on your mind',
-    color: 'from-red-500 to-pink-500',
+    recommendation: 'Take a break with ambient music and reflection'
   },
   {
     id: 'peaceful',
     name: 'Peaceful',
     emoji: '😌',
-    description: 'Calm and centered',
-    color: 'from-green-500 to-blue-500',
+    color: 'from-green-500/20 to-teal-500/20',
+    borderColor: 'border-green-500/30',
+    description: 'Feeling calm and centered',
+    recommendation: 'Enjoy classical music or write gratitude notes'
   },
   {
     id: 'focused',
     name: 'Focused',
     emoji: '🎯',
+    color: 'from-cyan-500/20 to-blue-500/20',
+    borderColor: 'border-cyan-500/30',
     description: 'Ready to concentrate',
-    color: 'from-cyan-500 to-blue-500',
+    recommendation: 'Try lo-fi beats and distraction-free journaling'
   },
   {
-    id: 'emotionally tired',
+    id: 'tired',
     name: 'Emotionally Tired',
     emoji: '😪',
+    color: 'from-gray-500/20 to-slate-500/20',
+    borderColor: 'border-gray-500/30',
     description: 'Drained and need rest',
-    color: 'from-gray-500 to-slate-500',
+    recommendation: 'Listen to ocean sounds and take it slow'
   },
 ]
 
 export default function MoodSpace() {
-  const [selectedMood, setSelectedMood] = useState<string | null>(null)
-  const currentMood = moods.find(m => m.id === selectedMood)
-  const ambience = selectedMood ? getMoodAmbience(selectedMood) : null
+  const [selectedMood, setSelectedMood] = useState<typeof moods[0] | null>(null)
 
   return (
-    <div className={`min-h-screen p-6 py-12 transition-all duration-1000 ${ambience?.background || ''}`}>
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen px-6 py-12">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -69,99 +78,41 @@ export default function MoodSpace() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center gap-2 glass-strong px-6 py-3 rounded-full mb-4"
+            className="inline-flex items-center gap-2 bg-pink-500/10 backdrop-blur-sm border border-pink-500/20 px-6 py-3 rounded-full mb-6"
           >
             <Heart className="w-5 h-5 text-pink-300" />
             <span className="text-sm uppercase tracking-wider text-pink-200">Mood Space</span>
           </motion.div>
           
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-3">
+          <h1 className="text-4xl md:text-6xl font-display font-bold text-white mb-4">
             How Are You Feeling?
           </h1>
-          <p className="text-pink-200/60 text-lg">
-            Your mood shapes your experience
+          <p className="text-lg md:text-xl text-pink-200/70 max-w-2xl mx-auto">
+            Choose your emotional state and get personalized recommendations
           </p>
         </motion.div>
 
-        {/* Current mood display */}
-        {currentMood && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            className={`glass-strong rounded-3xl p-8 mb-8 text-center ${ambience?.glow}`}
-          >
-            <div className="text-8xl mb-4">{currentMood.emoji}</div>
-            <h2 className="text-3xl font-bold text-white mb-2">
-              {currentMood.name}
-            </h2>
-            <p className="text-white/60 mb-6">
-              {currentMood.description}
-            </p>
-            
-            {/* Mood recommendations */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-              <div className="glass p-4 rounded-xl">
-                <p className="text-sm text-white/60 mb-2">Recommended Music</p>
-                <p className="text-white font-medium">
-                  {currentMood.id === 'anxious' && 'Calm Piano'}
-                  {currentMood.id === 'lonely' && 'Jazz Cafe'}
-                  {currentMood.id === 'overwhelmed' && 'Rain Sounds'}
-                  {currentMood.id === 'peaceful' && 'Classical'}
-                  {currentMood.id === 'focused' && 'Lo-fi Focus'}
-                  {currentMood.id === 'emotionally tired' && 'Ocean Night'}
-                </p>
-              </div>
-              
-              <div className="glass p-4 rounded-xl">
-                <p className="text-sm text-white/60 mb-2">Suggested Activity</p>
-                <p className="text-white font-medium">
-                  {currentMood.id === 'anxious' && 'Deep breathing'}
-                  {currentMood.id === 'lonely' && 'Join lounge chat'}
-                  {currentMood.id === 'overwhelmed' && 'Journal your thoughts'}
-                  {currentMood.id === 'peaceful' && 'Reflect quietly'}
-                  {currentMood.id === 'focused' && 'Start working'}
-                  {currentMood.id === 'emotionally tired' && 'Rest and listen'}
-                </p>
-              </div>
-              
-              <div className="glass p-4 rounded-xl">
-                <p className="text-sm text-white/60 mb-2">Ambient Scene</p>
-                <p className="text-white font-medium">
-                  {currentMood.id === 'anxious' && 'Soft city lights'}
-                  {currentMood.id === 'lonely' && 'Rainy window'}
-                  {currentMood.id === 'overwhelmed' && 'Quiet room'}
-                  {currentMood.id === 'peaceful' && 'Ocean night'}
-                  {currentMood.id === 'focused' && 'Cyber cafe'}
-                  {currentMood.id === 'emotionally tired' && 'Snowy night'}
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        )}
-
-        {/* Mood selection grid */}
+        {/* Mood Grid */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-8"
         >
           {moods.map((mood, index) => (
             <motion.button
               key={mood.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-              whileHover={{ y: -5, scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => setSelectedMood(mood.id)}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.1 * index }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setSelectedMood(mood)}
               className={`
-                glass p-8 rounded-2xl text-center transition-all duration-500
-                ${selectedMood === mood.id 
-                  ? `ring-2 ring-white/30 bg-gradient-to-br ${mood.color} bg-opacity-10` 
-                  : 'hover:bg-white/5'
-                }
+                p-8 rounded-3xl text-center transition-all
+                bg-gradient-to-br ${mood.color}
+                border-2 ${selectedMood?.id === mood.id ? mood.borderColor : 'border-white/10'}
+                ${selectedMood?.id === mood.id ? 'shadow-2xl' : 'hover:border-white/20'}
               `}
             >
               <div className="text-5xl md:text-6xl mb-4">{mood.emoji}</div>
@@ -175,16 +126,43 @@ export default function MoodSpace() {
           ))}
         </motion.div>
 
-        {/* Info note */}
-        {!selectedMood && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1 }}
-            className="text-center text-white/40 text-sm mt-8 italic"
+        {/* Selected Mood Details */}
+        {selectedMood && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl"
           >
-            Select a mood to personalize your experience
-          </motion.p>
+            <div className="flex items-start gap-6">
+              <div className="text-6xl">{selectedMood.emoji}</div>
+              <div className="flex-1">
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                  You're feeling {selectedMood.name.toLowerCase()}
+                </h2>
+                <p className="text-lg text-white/70 mb-6">
+                  {selectedMood.description}
+                </p>
+                
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                  <h3 className="text-lg font-semibold text-white mb-3">
+                    💡 Recommendation
+                  </h3>
+                  <p className="text-white/80">
+                    {selectedMood.recommendation}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {!selectedMood && (
+          <div className="text-center">
+            <p className="text-white/40 italic">
+              Select a mood to see personalized recommendations
+            </p>
+          </div>
         )}
       </div>
     </div>
